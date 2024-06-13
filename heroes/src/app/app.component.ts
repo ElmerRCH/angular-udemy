@@ -1,17 +1,13 @@
 import { initFlowbite } from 'flowbite';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterOutlet,RouterLink } from '@angular/router';
+import { RouterOutlet,RouterLink,RouterLinkActive} from '@angular/router';
 import { Component,OnInit,PLATFORM_ID,Inject} from '@angular/core';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { APP_ROUTING } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,RouterLink,NavbarComponent],
+  imports: [CommonModule,RouterOutlet,RouterLink,RouterLinkActive,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

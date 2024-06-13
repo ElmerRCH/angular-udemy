@@ -1,74 +1,89 @@
-import { Component,OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { initFlowbite } from 'flowbite';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterOutlet,RouterLink } from '@angular/router';
+import { Component,OnInit,PLATFORM_ID,Inject} from '@angular/core';
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { HeroesComponent } from './components/heroes/heroes.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { APP_ROUTING } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavbarComponent],
+  imports: [CommonModule,RouterOutlet,RouterLink,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent implements OnInit {
   title = 'heroes';
 
-
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   ngOnInit(): void {
-    initFlowbite();
-    this.darkMode()
+    if (isPlatformBrowser(this.platformId)) {
+      // Este código solo se ejecutará en el navegador
+      if (typeof initFlowbite === 'function') {
+        initFlowbite();
+        this.darkMode()
+      }
+    }
   }
 
   darkMode(){
       // Obtiene los íconos de toggle de tema
-      const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-      const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-      if (!themeToggleDarkIcon || !themeToggleLightIcon) {
-        console.error('Theme toggle icons not found.');
-        return;
-      }
+    if (!themeToggleDarkIcon || !themeToggleLightIcon) {
+      console.error('Theme toggle icons not found.');
+      return;
+    }
 
-      // Cambia los íconos basados en la configuración previa
-      if (localStorage.getItem('color-theme') === 'dark' || (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        themeToggleLightIcon.classList.remove('hidden');
-      } else {
-        themeToggleDarkIcon.classList.remove('hidden');
-      }
+    // Establecer el modo oscuro por defecto si no hay una preferencia guardada
+    if (!localStorage.getItem('color-theme')) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('color-theme', 'dark');
+    } else if (localStorage.getItem('color-theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    } else {
+      themeToggleDarkIcon.classList.remove('hidden');
+    }
 
-      // Obtiene el botón de toggle de tema
-      const themeToggleBtn = document.getElementById('theme-toggle');
+    // Obtiene el botón de toggle de tema
+    const themeToggleBtn = document.getElementById('theme-toggle');
 
-      if (!themeToggleBtn) {
-        console.error('Theme toggle button not found.');
-        return;
-      }
+    if (!themeToggleBtn) {
+      console.error('Theme toggle button not found.');
+      return;
+    }
 
-      // Añade el evento click al botón de toggle de tema
-      themeToggleBtn.addEventListener('click', () => {
-        // Alterna los íconos dentro del botón
-        themeToggleDarkIcon.classList.toggle('hidden');
-        themeToggleLightIcon.classList.toggle('hidden');
+    // Añade el evento click al botón de toggle de tema
+    themeToggleBtn.addEventListener('click', () => {
+      // Alterna los íconos dentro del botón
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
 
-        // Alterna el tema y guarda la configuración en localStorage
-        if (localStorage.getItem('color-theme')) {
-          if (localStorage.getItem('color-theme') === 'light') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-          }
+      // Alterna el tema y guarda la configuración en localStorage
+      if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
         } else {
-          if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-          } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-          }
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
         }
-      });
+      } else {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      }
+    });
   }
 
 }

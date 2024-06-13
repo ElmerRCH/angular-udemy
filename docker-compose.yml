@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  heroes:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - 4500:4500
+    volumes:
+      - ./heroes:/app:delegated
+    command: ["sh", "-c", "npm install && ng serve --host 0.0.0.0 --port 4500", "--live-reload"]

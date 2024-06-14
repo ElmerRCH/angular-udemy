@@ -1,0 +1,7 @@
+h1{
+    text-align: center;
+}
+.cards-container{
+    display: flex;
+    margin-left: 20px;
+}

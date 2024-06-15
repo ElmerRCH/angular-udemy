@@ -3,5 +3,20 @@ h1{
 }
 .cards-container{
     display: flex;
-    margin-left: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cards-container div{
+    margin:10px;
+}
+.name-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.see-more{
+    display: flex;
+    justify-content: center;
 }

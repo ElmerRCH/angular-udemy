@@ -11,5 +11,5 @@ export const routes: Routes = [
   {path:'heroe/:id',component: HeroeComponent},
 
   {path:'**',pathMatch:'full',redirectTo: 'home'}
-
+  
 ];

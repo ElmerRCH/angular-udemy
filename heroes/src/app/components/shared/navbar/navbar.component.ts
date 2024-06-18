@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet,RouterLink,RouterLinkActive} from '@angular/router';
+import { RouterOutlet,RouterLink,RouterLinkActive,Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeroesService } from '../../../services/heroes.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,14 +11,14 @@ import { HeroesService } from '../../../services/heroes.service';
 })
 export class NavbarComponent {
   
-  constructor(private heroesService:HeroesService){
+  constructor(
+              private router: Router,
+  ){
 
   }
 
   buscarHeroe(texto:any){
-    
-    let hero = this.heroesService.buscarHeroe(texto.toLowerCase())
-    console.log('llego',hero)
+    this.router.navigate(['search',texto]);
   }
 
 

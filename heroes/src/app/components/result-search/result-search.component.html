@@ -1,3 +1,13 @@
+<section *ngIf="heroe.length == 0" class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">No heroe</h1>
+            <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Error.</p>
+            <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">prueba buscando otro</p>
+        </div>   
+    </div>
+</section>
+
 
 <div *ngFor="let heroe of heroe" >
     <a href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">

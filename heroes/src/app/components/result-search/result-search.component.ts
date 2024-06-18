@@ -16,7 +16,7 @@ export class ResultSearchComponent {
   heroe:any = {};
 
   constructor(private activatedRoute:ActivatedRoute,
-              private heroesServices:HeroesService
+              private heroesServices:HeroesService,
 
   ){}
 
@@ -25,5 +25,5 @@ export class ResultSearchComponent {
       this.heroe = this.heroesServices.buscarHeroe(params['name'])
     });
   }
-  
+
 }

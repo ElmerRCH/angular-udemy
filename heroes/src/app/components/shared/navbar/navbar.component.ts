@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive} from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HeroesService } from '../../../services/heroes.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   
+  constructor(private heroesService:HeroesService){
 
+  }
 
   buscarHeroe(texto:any){
-    console.log('llego',texto)
+    
+    let hero = this.heroesService.buscarHeroe(texto.toLowerCase())
+    console.log('llego',hero)
   }
 
 

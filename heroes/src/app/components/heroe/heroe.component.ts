@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterLink} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { HeroesService } from '../../services/heroes.service';
-import { RouterOutlet,RouterLink,RouterLinkActive} from '@angular/router';
+import { UpperCasePipe } from '@angular/common'
 
 @Component({
   selector: 'app-heroe',
   standalone: true,
-  imports: [],
+  imports: [RouterLink,UpperCasePipe],
   templateUrl: './heroe.component.html',
   styleUrl: './heroe.component.css'
 })
-
 
 export class HeroeComponent {
   id :number = 0

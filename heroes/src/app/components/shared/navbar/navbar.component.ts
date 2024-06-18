@@ -11,4 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   
+
+
+  buscarHeroe(texto:any){
+    console.log('llego',texto)
+  }
+
+
+
 }

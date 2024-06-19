@@ -13,14 +13,11 @@ export class NavbarComponent {
   
   constructor(
               private router: Router,
-  ){
+  ){}
 
-  }
-
+  
   buscarHeroe(texto:any){
     this.router.navigate(['search',texto]);
   }
-
-
 
 }
